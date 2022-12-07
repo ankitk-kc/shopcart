@@ -38,5 +38,10 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+router.beforeEach((to, from, next) => {
+  const getDetails = localStorage.getItem("user-info")
+  if (to.name !== 'home' && !getDetails) next({ name: 'home' })
+  else next()
+})
 
 export default router
